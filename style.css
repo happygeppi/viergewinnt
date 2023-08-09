@@ -1,0 +1,58 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --gap: 16px;
+  --d: 64px;
+}
+
+body {
+  background-color: #333;
+  height: 100vh;
+  display: grid
+}
+.draw {
+  background-color: rgb(49, 28, 134) !important;
+}
+
+#container {
+  position: absolute;
+  place-self: center;
+  background-color: rgb(59, 26, 193);
+  border-radius: var(--gap);
+  padding: calc(0.5 * var(--gap));
+  display: flex;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  height: fit-content;
+  width: fit-content;
+  position: relative;
+  padding: calc(0.5 * var(--gap));
+  border-radius: var(--gap);
+}
+.col:hover {
+  background-color: #fff2;
+}
+
+.cell {
+  width: var(--d);
+  height: var(--d);
+  background-color: #0005;
+  border-radius: 50%;
+  position: relative;
+}
+.red {
+  background-color: #d22 !important;
+}
+.yellow {
+  background-color: #dd2 !important;
+}
+#throw {
+  position: fixed;
+}
