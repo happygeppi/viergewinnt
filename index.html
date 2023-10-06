@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <title>Vier Gewinnt</title>
+  <script src="players.js" defer></script>
+  <script src="game.js" defer></script>
+  <script src="computer.js" defer></script>
+  <script src="main.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <div id="switch-colors-container">
+      <button type="button" id="switch-colors">Farben &auml;ndern</button>
+    </div>
+    <div id="inner-container">
+      <div id="human-container">
+        <div id="human" class="red">
+          <img src="img/human.svg" alt="human" />
+        </div>
+      </div>
+      <div id="coin-container">
+        <div id="coin">
+          <button type="button" id="coin-top">
+            <p>M&uuml;nze <br />werfen</p>
+          </button>
+          <div id="coin-content">
+            <div class="side red">
+              <p>Rot beginnt</p>
+            </div>
+            <div class="side yellow">
+              <p>Gelb beginnt</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="computer-container">
+        <div id="computer" class="yellow">
+          <img src="img/computer.svg" alt="computer" />
+        </div>
+      </div>
+    </div>
+    <div id="play-container">
+      <a href="play/index.html?rh" id="play">Spielen</a>
+    </div>
+  </main>
+</body>
+</html>

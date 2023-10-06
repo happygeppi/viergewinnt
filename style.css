@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Raleway, Montserrat, Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+:root {
+  --d: 72px;
+  --gap: calc(var(--d) * 0.3);
+}
+
+body {
+  height: 100vh;
+  background-color: #222;
+  display: grid;
+  position: relative;
+}
+
+main {
+  position: relative;
+  place-self: center;
+  display: grid;
+  width: 90%;
+  height: 90%;
+}
+
+#inner-container {
+  place-self: center;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+#inner-container > * {
+  position: relative;
+  display: grid;
+}
+#inner-container > * > * {
+  place-self: center;
+  width: 25vmin;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: flex;
+  transition: 300ms;
+}
+
+#human,
+#computer {
+  overflow: hidden;
+}
+
+#human img,
+#computer img {
+  position: relative;
+  height: 90%;
+  aspect-ratio: 1;
+  margin: auto;
+}
+
+.red {
+  background-color: #f00;
+}
+.yellow {
+  background-color: #ff0;
+}
+
+#coin {
+  position: relative;
+}
+#coin-top {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(74, 53, 231);
+  position: relative;
+  z-index: 10;
+  border-radius: 50%;
+  scale: 1.2;
+  transition: 500ms;
+}
+#coin-top:hover {
+  scale: 1.5;
+  transition: 200ms;
+}
+
+#coin-top p,
+#coin-content p {
+  place-self: center;
+  color: #000;
+  font-size: 4vmin;
+}
+
+#coin-content {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  transform-style: preserve-3d;
+  perspective: 2px;
+
+  --x: 3.5;
+  --y: 0;
+  --z: -2.5;
+  --t: 2;
+}
+.animation {
+  animation: flip calc(var(--t) * 1s) linear forwards;
+}
+#coin-content > * {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  backface-visibility: hidden;
+  border-radius: 50%;
+}
+#coin-content .red {
+  z-index: 5;
+}
+#coin-content .yellow {
+  z-index: 3;
+  transform: rotateY(0.5turn);
+}
+
+@keyframes flip {
+  100% {
+    rotate: 2turn;
+    transform: rotateX(calc(1turn * var(--x))) rotateY(calc(1turn * var(--y)))
+      rotateZ(calc(1turn * var(--z)));
+  }
+}
+
+#switch-colors,
+#play {
+  z-index: 20;
+  place-self: center;
+  background-color: #ddd;
+  --pad: 8px;
+  height: calc(var(--h) + 2 * var(--pad));
+  line-height: var(--h);
+  font-size: calc(var(--h) * 0.75);
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  padding: var(--pad) 16px;
+  cursor: pointer;
+  transition: 500ms;
+}
+#switch-colors:hover,
+#play:hover {
+  scale: 1.2;
+  transition: 200ms;
+}
+
+#switch-colors-container,
+#play-container {
+  position: absolute;
+  justify-self: center;
+  display: grid;
+}
+
+#switch-colors-container {
+  top: 48px;
+}
+#switch-colors {
+  --h: 30px;
+}
+
+#play-container {
+  display: none;
+  bottom: 48px;
+}
+#play {
+  --h: 48px;
+  text-decoration: none;
+  color: #000;
+}
+
+/* board */
+#container {
+  position: absolute;
+  place-self: center;
+  --clr1: #2300ae;
+  --clr2: #4d2ad8;
+  background-image: linear-gradient(45deg, var(--clr1) 0%, var(--clr2) 100%);
+  box-shadow: 0 0 20px #0005;
+  border-radius: calc(1.5 * var(--gap));
+  padding: calc(0.5 * var(--gap));
+  display: flex;
+  --turn: #f00;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: var(--gap);
+  padding: calc(0.5 * var(--gap));
+  border-radius: var(--gap);
+}
+.col::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--gap);
+  box-shadow: 0 0 8px #0007;
+  background-image: linear-gradient(45deg, #ccc2 0%, #9992 100%);
+  opacity: 0;
+  transition: 150ms;
+}
+.players-turn .col:hover::after {
+  opacity: 1;
+}
+
+.cell {
+  width: var(--d);
+  height: var(--d);
+  background-color: #0005;
+  border-radius: 50%;
+  position: relative;
+  --color: #0000;
+}
+.cell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: var(--color);
+  transform: scale(0);
+  transform-origin: center center;
+  transition: transform 200ms;
+}
+.cell.placed::before {
+  transform: scale(1);
+}
+.cell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 2px 2px 4px #0005;
+}
+.cell.placed::after {
+  box-shadow: inset 2px 2px 8px #000a;
+  background-image: radial-gradient(#fff3 0%, #fff0 100%);
+}
